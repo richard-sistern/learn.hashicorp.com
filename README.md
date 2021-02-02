@@ -1,2 +1,2 @@
-# learn.hashicorp.com
- Notes and examples from the HashiCorp tutorials
+# HashiCorp Learn
+ Notes and examples from the HashiCorp [tutorials](https://learn.hashicorp.com/) site.
