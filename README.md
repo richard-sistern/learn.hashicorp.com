@@ -52,7 +52,7 @@ New-Item main.tf -Type File
 
 Copy the following into main.tf
 
-```json
+```hcl
 terraform {
   required_providers {
     docker = {
