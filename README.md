@@ -108,7 +108,77 @@ Remove the container
 terraform destroy
 ```
 
+### AWS Demo
 
+Terraform requires the following to work with AWS:
+
+- An AWS account
+- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) 
+- AWS [credentials](https://console.aws.amazon.com/iam/home?#security_credential) configured with `aws configure`
+
+This creates a file at `~/.aws/credentials` on MacOS and Linux or `%UserProfile%\.aws\credentials` on Windows which is used to store your credentials.
+
+Create a demo folder and file
+
+```shell
+mkdir terraform-aws-demo && cd terraform-aws-demo
+New-Item aws.tf -Type File
+```
+
+Add the following to aws.tf
+
+```hcl
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 2.70"
+    }
+  }
+}
+
+provider "aws" {
+  profile = "default"
+  region  = "us-west-2"
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-830c94e3"
+  instance_type = "t2.micro"
+}
+```
+
+Not necessarily required, but good practice in a team
+
+```shell
+terraform fmt
+
+terraform validate
+```
+
+Apply changes to AWS
+
+```shell
+terrform apply
+```
+
+Validate in EC2 console and inspect the current state using
+
+```shell
+terraform show
+
+terraform state list
+```
+
+
+
+Teardown (avoid **$$$**)
+
+```shell
+terraform destroy
+```
+
+The `terraform destroy` command terminates any and all resources defined in the configuration file.  Use with caution!
 
 ## Vault
 
