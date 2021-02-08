@@ -125,6 +125,8 @@ mkdir terraform-aws-demo && cd terraform-aws-demo
 New-Item aws.tf -Type File
 ```
 
+#### Create
+
 Add the following to aws.tf
 
 ```hcl
@@ -170,9 +172,32 @@ terraform show
 terraform state list
 ```
 
+#### Change
 
+Modify the .tf to change the AMI to Ubuntu 16.04
 
-Teardown (avoid **$$$**)
+```hcl
+resource "aws_instance" "example" { 
+	- ami           = "ami-830c94e3" 
+	+ ami           = "ami-08d70e59c07c61a3a"  
+	instance_type = "t2.micro" 
+}
+```
+
+Terraform will know to destroy the old one when deployed with 
+
+```shell
+terraform apply
+```
+
+The output contains the following:
+
+- `+/-` means Terraform will destroy and recreate the resource
+- `~` means Terraform will update the resource in place
+
+#### Destroy 
+
+Best to avoid spending **$$$**
 
 ```shell
 terraform destroy
