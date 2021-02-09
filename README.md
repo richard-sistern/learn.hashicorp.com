@@ -205,6 +205,62 @@ terraform destroy
 
 The `terraform destroy` command terminates any and all resources defined in the configuration file.  Use with caution!
 
+#### Input Variables
+
+Create a `variables.tf` file and enter the following
+
+```hcl
+variable "region" {
+  default = "us-west-2"
+}
+```
+
+> The file name is unimportant.  Terraform will load all .tf files in a directory
+
+Change the region in  to use the new variable
+
+```hcl
+provider "aws" {
+  profile = "default"
+  # region  = "us-west-2"
+  region = var.region
+}
+```
+
+Other methods of assigning variables (preference order)
+
+##### Command Line Flags
+
+terraform apply -var 'region=us-west-2'
+
+##### File
+
+Create a `terraform.tfvars` file to store the variables
+
+```hcl
+region = "us-west-2"
+```
+
+Additional files can be specified at run-time
+
+```shell
+terraform apply -var-file="secret.tfvars"  -var-file="production.tfvars"
+```
+
+*Note: this could be used for staging/production to use the same Terraform configuration*
+
+##### Environment Variables
+
+Terraform can read environment variables in the format `TF_VAR_name`, for example `TF_VAR_region`
+
+##### UI
+
+Terraform will request any missing variables when running 
+
+##### Defaults
+
+If no value is assigned, the specified default value will be used
+
 ## Vault
 
 
