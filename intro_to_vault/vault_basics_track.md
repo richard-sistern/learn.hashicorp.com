@@ -2,8 +2,6 @@
 
 
 
-[TOC]
-
 ## The Vault CLI
 
 The Vault Command Line Interface (CLI) allows you to interact with Vault servers.
