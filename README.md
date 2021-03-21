@@ -9,6 +9,10 @@ Notes and examples from the HashiCorp [tutorials](https://learn.hashicorp.com/) 
 
 Some parts are Windows specific, the HasiCorp tutorials have instructions for different operating systems.
 
+## Bookmark
+
+https://learn.hashicorp.com/tutorials/terraform/aws-remote?in=terraform/aws-get-started
+
 ## Terraform
 
 ### Install
