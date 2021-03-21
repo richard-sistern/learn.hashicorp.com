@@ -261,7 +261,7 @@ Terraform will request any missing variables when running
 
 If no value is assigned, the specified default value will be used
 
-#### Output Variables
+#### Query Data with Outputs
 
 Ensure environment is ready
 
@@ -270,7 +270,31 @@ terraform init
 terraform apply
 ```
 
+##### Output EC2 instance configuration
 
+Create a file called `outputs.tf`
+
+```hcl
+output "instance_id" {
+  description = "ID of the EC2 instance"
+  value       = aws_instance.example.id
+}
+
+output "instance_public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.example.public_ip
+}
+```
+
+```bash
+terraform apply
+
+terraform output
+instance_id = "i-095e3a5b5432873d4"
+instance_public_ip = "54.190.181.203"
+```
+
+Tutorial: [Output data from Terraform](https://learn.hashicorp.com/tutorials/terraform/outputs?in=terraform/configuration-language)
 
 ## Vault
 
