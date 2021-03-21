@@ -261,6 +261,17 @@ Terraform will request any missing variables when running
 
 If no value is assigned, the specified default value will be used
 
+#### Output Variables
+
+Ensure environment is ready
+
+```bash
+terraform init
+terraform apply
+```
+
+
+
 ## Vault
 
 
