@@ -302,7 +302,7 @@ Tutorial: [Output data from Terraform](https://learn.hashicorp.com/tutorials/ter
 
 #### Store Remote State
 
-Configure Terrofrom configuration to store remote state
+Configure Terraform configuration to store remote state
 
 ```hcl
 backend "remote" {
