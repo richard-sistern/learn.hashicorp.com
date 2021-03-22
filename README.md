@@ -300,6 +300,32 @@ instance_public_ip = "54.190.181.203"
 
 Tutorial: [Output data from Terraform](https://learn.hashicorp.com/tutorials/terraform/outputs?in=terraform/configuration-language)
 
+#### Store Remote State
+
+Configure Terrofrom configuration to store remote state
+
+```hcl
+backend "remote" {
+  organization = "<ORG_NAME>"
+  workspaces {
+  	name = "Example-Workspace"
+  }
+}
+```
+
+In Work Space > Settings > General
+
+Change the `execution mode` to `local`
+
+Login to Terraform Cloud
+
+```bash
+terraform login
+terraform init
+```
+
+Terraform is now storing state remotely
+
 ## Vault
 
 
