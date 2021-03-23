@@ -5,13 +5,13 @@ Notes and examples from the HashiCorp [tutorials](https://learn.hashicorp.com/) 
 - [Vault](#Vault)
 - [Consul](#Vault)
 - Vagrant
-- Packer
+- [Packer](#Packer)
 
 Some parts are Windows specific, the HasiCorp tutorials have instructions for different operating systems.
 
 ## Bookmark
 
-https://learn.hashicorp.com/tutorials/terraform/aws-remote?in=terraform/aws-get-started
+https://learn.hashicorp.com/tutorials/packer/getting-started-build-image?in=packer/getting-started#a-windows-example
 
 ## Terraform
 
@@ -330,4 +330,43 @@ Terraform is now storing state remotely
 
 
 ## Consul
+
+## Packer
+
+*Notes from HashiCorp [getting started](https://learn.hashicorp.com/collections/packer/getting-started) tutorial*
+
+Verify install with `packer version`
+
+### Build an Image
+
+Create the `example.pkr.hcl` file.  The `source` block configures a specific builder plugin, which is invoked by a `build`.  A `source` can be reused across multiple `builds` and you can use multiple `sources` in a single build.
+
+The `example.pkr.hcl` builds an EBS-backed AMI by launching a source AMI, provisioning on top of that, and re-packaging it into a new AMI. 
+
+Configure AWS access and validate
+
+```bash
+export AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY
+export AWS_SECRET_ACCESS_KEY=YOUR_SECRET_KEY
+
+packer validate example.pkr.hcl
+```
+
+*In Windows, use `set AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY` or `$env:"AWS_ACCESS_KEY_ID=YOUR_ACCESS_KEY"` or create a credentials file in `%USERPROFILE%.aws\credentials` *
+
+The file is valid if the validate command doesn't generate any output.
+
+Build the image by calling `packer build` with the template file
+
+```bash
+packer build \
+    -var 'ami_name=packer-tutorial' \
+    example.pkr.hcl
+```
+
+**Packer only builds images, you need to destroy it manually.**
+
+Remove the AMI by first deregistering it on the [AWS AMI management page](https://console.aws.amazon.com/ec2/home?region=us-east-1#s=Images). Next, delete the associated snapshot on the [AWS snapshot management page](https://console.aws.amazon.com/ec2/home?region=us-east-1#s=Snapshots).
+
+[Packer a Complete Guide with Example](https://medium.com/techno101/packer-a-complete-guide-with-example-cf062b7495eb)
 
